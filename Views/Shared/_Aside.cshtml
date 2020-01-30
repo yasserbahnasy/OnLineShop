@@ -1,0 +1,70 @@
+﻿@using OnLineShop.Models;
+
+<!-- Sidebar -->
+<aside class="sidebar right-sidebar col-lg-3 col-md-3 col-sm-3">
+
+    <!-- Categories -->
+    <div class="row sidebar-box purple">
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <div class="sidebar-box-heading">
+                <i class="icons icon-folder-open-empty"></i>
+                <h4>الأقسام</h4>
+            </div>
+
+            <div class="sidebar-box-content">
+                <ul>
+                    @{
+                        OnlineShopDBEntities db = new OnlineShopDBEntities();
+                        var Categories = db.tb_Categories.ToList();
+
+                        foreach (var item in Categories)
+                        {
+                            <li><a href="/Category/@item.cat_name.ToString().Replace(" ", "-")">@item.cat_name <i class="icons icon-left-dir"></i></a></li>
+                        }
+                    }
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /Categories -->
+    
+
+    <!-- Bestsellers -->
+    <div class="row sidebar-box red">
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <div class="sidebar-box-heading">
+                <i class="icons icon-award-2"></i>
+                <h4>أفضل المنتجات</h4>
+            </div>
+
+            <div class="sidebar-box-content">
+                <table class="bestsellers-table">
+                    @{
+                        var products = db.tb_products.ToList();
+                        foreach (var item in products.Take(10))
+                        {
+                            <tr>
+                                <td class="product-thumbnail"><a href="/product/@item.id"><img src="~/uploads/@item.image" alt="@item.title"></a></td>
+                                <td class="product-info">
+                                    <p><a href="/product/@item.id">@item.title</a></p>
+                                    <span class="price">@item.price EGP</span>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /Bestsellers -->
+    
+</aside>
+<!-- /Sidebar -->
+

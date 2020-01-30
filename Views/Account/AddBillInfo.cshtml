@@ -1,0 +1,132 @@
+﻿@model OnLineShop.Models.tb_billinfo
+
+@{
+    ViewBag.Title = "إضافة طريقة دفع جديدة";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+
+    <section class="main-content col-lg-9 col-md-9 col-sm-9">
+
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 register-account">
+
+                <div class="carousel-heading no-margin">
+                    <h4>إضافة طريقة دفع جديدة</h4>
+                </div>
+                
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.fullname, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.fullname, new { htmlAttributes = new { @class = "form-control", @placeholder = "الإسم كامل" } })
+                            @Html.ValidationMessageFor(model => model.fullname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @placeholder = "البريد الإلكتروني" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.company_name, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.company_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "إسم الشركة" } })
+                            @Html.ValidationMessageFor(model => model.company_name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.country, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.country, new { htmlAttributes = new { @class = "form-control", @placeholder = "الدولة" } })
+                            @Html.ValidationMessageFor(model => model.country, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control", @placeholder = "المحافظة" } })
+                            @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.region, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.region, new { htmlAttributes = new { @class = "form-control", @placeholder = "المنطقة" } })
+                            @Html.ValidationMessageFor(model => model.region, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control", @placeholder = "العنوان" } })
+                            @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "رقم الهاتف" } })
+                            @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.postal_code, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.postal_code, new { htmlAttributes = new { @class = "form-control", @placeholder = "الرمز البريدي" } })
+                            @Html.ValidationMessageFor(model => model.postal_code, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                   
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <input class="big" type="submit" value="إضافة">
+                            <input class="big" type="reset" value="إلغاء">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+
+ <!--Partial Aside-->
+@Html.Partial("_account")
+<!--Partial Aside-->

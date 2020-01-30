@@ -1,0 +1,122 @@
+﻿@model IEnumerable<OnLineShop.Models.tb_actions>
+
+@{
+    ViewBag.Title = "المنتجات المفضلة";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+<section class="main-content col-lg-9 col-md-9 col-sm-9">
+
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <table class="wishlist-table">
+
+                <tbody>
+                    <tr>
+                        <th class="wishlist-image">صورة المنتج</th>
+                        <th>إسم المنتج</th>
+                        <th>السعر</th>
+                        <th>الأحداث</th>
+                    </tr>
+@foreach (var item in Model)
+{
+                    <tr>
+                        <td class="wishlist-image">
+                            <a href="/product/@Html.DisplayFor(modelItem => item.tb_products.id)"><img src="~/uploads/@Html.DisplayFor(modelItem => item.tb_products.image)" alt="@Html.DisplayFor(modelItem => item.tb_products.title)" class="thumbnail"  style="width:180px; height:180px"></a>
+                        </td>
+                        <td class="wishlist-info">
+                            <h5><a href="/product/@Html.DisplayFor(modelItem => item.tb_products.id)">@Html.DisplayFor(modelItem => item.tb_products.title)</a></h5>
+                            <span class="product-category"><a href="/Category/@Html.DisplayFor(modelItem => item.tb_products.tb_Categories.cat_name).ToString().Replace(" ", "_")">@Html.DisplayFor(modelItem => item.tb_products.tb_Categories.cat_name)</a></span>
+                            <div class="rating readonly-rating" data-score="4" title="good" style="width: 100px;"><input type="hidden" name="score" value="4" readonly="readonly"></div>
+                        </td>
+                        <td class="wishlist-price">
+                            <span class="price">@Html.DisplayFor(modelItem => item.tb_products.price) EGP</span>
+                        </td>
+                        <td class="wishlist-actions">
+
+                            @using (Html.BeginForm("AddCart", "Home", new { product_id = @Html.DisplayFor(modelItem => item.product_id) }, FormMethod.Post, new { id = "addcart "+ item.id }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="numeric-input">
+                                    <select name="quantity" id="quantity">
+                                        
+                                        @for (int i = 1; i <= @item.tb_products.quantity; i++)
+                                        {
+                                            if (item.quantity != i)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                        <a href="Javascript:document.getElementById('addcart @item.id').submit()">
+                                            <span class="add-to-cart">
+                                                <span class="action-wrapper">
+                                                    <i class="icons icon-basket-2"></i>
+                                                    <span class="action-name">إضافة إلي سله المشتريات</span>
+                                                </span>
+                                            </span>
+                                        </a>
+                            }
+
+                            
+                            <a href="/Account/DeleteProductWish/@Html.DisplayFor(modelItem => item.id)">
+                                <span class="add-to-trash">
+                                    <span class="action-wrapper">
+                                        <i class="icons icon-trash-8"></i>
+                                        <span class="action-name">حذف</span>
+                                    </span>
+                                </span>
+                            </a>
+
+                        </td>
+                    </tr>
+
+}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="category-results">
+                <p>Results 1-6 of 6</p>
+                <p>
+                    Show
+                    <select class="chosen-select" style="display: none;">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>6</option>
+                        <option>P10</option>
+                    </select><div class="chosen-container chosen-container-single chosen-container-single-nosearch" style="width: 71px;" title=""><a class="chosen-single" tabindex="-1"><span>1</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chosen-results"></ul></div></div>
+                    per page
+                </p>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="pagination">
+                <a href="#"><div class="previous"><i class="icons icon-left-dir"></i></div></a>
+                <a href="#"><div class="page-button">1</div></a>
+                <a href="#"><div class="page-button">2</div></a>
+                <a href="#"><div class="page-button">3</div></a>
+                <a href="#"><div class="next"><i class="icons icon-left-dir"></i></div></a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+ <!--Partial Aside-->
+@Html.Partial("_account")
+<!--Partial Aside-->

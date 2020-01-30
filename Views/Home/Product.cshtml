@@ -1,0 +1,245 @@
+﻿@model OnLineShop.Models.tb_products
+@using OnLineShop.Models;
+@{
+
+    OnlineShopDBEntities db = new OnlineShopDBEntities();
+    var Products = from pro in db.tb_products
+                   where pro.category_id == Model.category_id
+                   select pro;
+    var RelatedProducts = Products.ToList();
+}
+@{
+    ViewBag.Title = Html.DisplayFor(model => model.title);
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="alert alert-success msgAlert"></div>
+<section class="main-content col-lg-9 col-md-9 col-sm-9">
+
+
+    <div id="product-single">
+
+        <!-- Product -->
+        <div class="product-single">
+
+            <div class="row">
+
+                <!-- Product Images Carousel -->
+                <div class="col-lg-5 col-md-5 col-sm-5 product-single-image">
+
+                    <div id="product-slider">
+                        <ul class="slides">
+                            <li>
+                                <img class="cloud-zoom" src="~/uploads/@Html.DisplayFor(model => model.image)" data-large="/uploads/@Html.DisplayFor(model => model.image)" alt="" style="visibility: visible;">
+                                <a class="fullscreen-button" href="~/uploads/@Html.DisplayFor(model => model.image)">
+                                    <div class="product-fullscreen">
+                                        <i class="icons icon-resize-full-1"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /Product Images Carousel -->
+
+
+                <div class="col-lg-7 col-md-7 col-sm-7 product-single-info">
+
+                    <h2>@Html.DisplayFor(model => model.title)</h2>
+                    <div class="rating-box">
+                        <div class="rating readonly-rating" data-score="4" title="good" style="width: 100px;"></div>
+                        
+                    </div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>البائع</td>
+                                <td><a href="#">@Html.DisplayFor(model => model.tb_Users.fullname)</a></td>
+                            </tr>
+                            <tr>
+                                <td>المتوفر</td>
+                                <td>
+                                    @{
+                                        if (Model.quantity == 0)
+                                        {
+                                            <span class="green">لا توجد قطع متوفرة من هذا المنتج</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="green">متوفر</span> @Html.DisplayFor(model => model.quantity)
+                                            <p>قطعة</p>
+                                        }
+                                    } 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>من قسم</td>
+                                <td><a href="/Category/@Html.DisplayFor(model => model.tb_Categories.cat_name).ToString().Replace(" ", "-")">@Html.DisplayFor(model => model.tb_Categories.cat_name)</a></td>
+                            </tr>
+                            <tr>
+                                <td>العلامة التجارية</td>
+                                <td><a href="/brand/@Html.DisplayFor(model => model.tb_brands.englishname).ToString().Replace(" ", "-")">@Html.DisplayFor(model => model.tb_brands.name)</a></td>
+                            </tr>
+                            <tr>
+                                <td>كود المنتج</td>
+                                <td>PBS173</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <span class="price"> @Html.DisplayFor(model => model.price) جنيهاً مصرياً</span>
+                    @{
+                        if (Model.quantity != 0)
+                        {
+                            <table class="product-actions-single">
+                                <tbody>
+                                    <tr>
+                                        <td>الكمية المطلوبة:</td>
+                                        <td>
+                                            @using (Html.BeginForm("AddCart", "Home", new { product_id = @Html.DisplayFor(model => model.id) }, FormMethod.Post, new { id = "addcart" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                <div class="numeric-input">
+
+                                                    <input type="text" name="quantity" id="quantity" value="1">
+                                                    <span class="arrow-up"><i class="icons icon-up-dir"></i></span>
+                                                    <span class="arrow-down"><i class="icons icon-down-dir"></i></span>
+                                                </div>
+                                                <a href="Javascript:document.getElementById('addcart').submit()">
+                                                    <span class="add-to-cart">
+                                                        <span class="action-wrapper">
+                                                            <i class="icons icon-basket-2"></i>
+                                                            <span class="action-name">إضافة إلي سله المشتريات</span>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="product-actions">
+                                <span class="add-to-favorites">
+                                    <input type="hidden" name="product_id" id="product_id" value="@Html.DisplayFor(model => model.id)">
+                                    <span class="action-wrapper">
+                                        <a id="AddToWish">
+                                            <i class="icons icon-heart-empty"></i>
+                                            <span class="action-name">إضافة إلي المفضلات</span>
+                                        </a>
+                                    </span>
+                                </span>
+                                <span class="green product-action">
+                                    <span class="action-wrapper">
+                                        <i class="icons icon-info"></i>
+                                        <span class="action-name">Ask a question</span>
+                                    </span>
+                                </span>
+                            </div>
+                        }
+                    }
+                   
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Product -->
+        <!-- Product Tabs -->
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+
+                <div class="tabs">
+
+                    <div class="tab-heading">
+                        <a href="#tab1" class="button big active">المواصفات</a>
+                    </div>
+
+                    <div class="page-content tab-content">
+
+                        <div id="tab1" style="display: block;">
+                            <p>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.description).ToString()))</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Product Tabs -->
+
+    </div>
+
+    <div class="products-row row">
+
+        <!-- Carousel Heading -->
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <div class="carousel-heading">
+                <h4>المزيد من @Html.DisplayFor(model => model.tb_Categories.cat_name)</h4>
+                <div class="carousel-arrows">
+                    <h4><a href="~/category/@Html.DisplayFor(model => model.tb_Categories.cat_name).ToString().Replace(" ", "_")">المزيد</a></h4>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Carousel Heading -->
+        <!-- Carousel -->
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="RelatedProduct" data-max-items="3">
+               @foreach (var subItem in RelatedProducts.Take(3))
+               {
+                 <div class="owl-item">
+                    <div>
+                        <!-- Carousel Item -->
+                        <div class="product">
+
+                            <div class="product-image">
+                                <img src="/uploads/@subItem.image" alt="@subItem.title">
+                                <a href="/product/@subItem.id" class="product-hover">
+                                    <i class="icons icon-eye-1"></i> نظره سريعة
+                                </a>
+                            </div>
+
+                            <div class="product-info">
+                                <h5><a href="/product/@subItem.id">@subItem.title</a></h5>
+                                <span class="price">@subItem.price EGP</span>
+                                <div class="rating readonly-rating" data-score="4"></div>
+                            </div>
+
+                            <div class="product-actions">
+                                <span class="add-to-cart current">
+                                    <span class="action-wrapper">
+                                        <i class="icons icon-basket-2"></i>
+                                        <span class="action-name">إضافة إلي سلة المشتريات</span>
+                                    </span>
+                                </span>
+                                <span class="add-to-favorites">
+                                    <span class="action-wrapper">
+                                        <i class="icons icon-heart-empty"></i>
+                                        <span class="action-name">إضافة إلي المنتجات المفضلة</span>
+                                    </span>
+                                </span>
+                                
+                            </div>
+
+                        </div>
+                        <!-- /Carousel Item -->
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+       <!-- /Carousel -->
+
+    </div>
+
+
+</section>
+
+
+<!--Partial Aside-->
+@Html.Partial("_Aside")
+<!--Partial Aside-->

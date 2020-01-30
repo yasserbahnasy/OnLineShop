@@ -1,0 +1,112 @@
+﻿@model OnLineShop.Models.tb_billinfo
+
+@{
+    ViewBag.Title = "تعديل طريقة الدفع";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+<section class="main-content col-lg-9 col-md-9 col-sm-9">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 register-account">
+            <div class="carousel-heading no-margin">
+                <h4>تعديل طريقة الدفع</h4>
+            </div>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="page-content">
+                    @Html.HiddenFor(model => model.user_id)
+                    <table class="orderinfo-table">
+
+                        <tbody>
+                            <tr>
+                                <th>@Html.LabelFor(model => model.fullname)</th>
+                                <td>
+                                    @Html.EditorFor(model => model.fullname)
+                                    @Html.ValidationMessageFor(model => model.fullname, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>@Html.LabelFor(model => model.email)</th>
+                                <td>
+                                    @Html.EditorFor(model => model.email)
+                                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>@Html.LabelFor(model => model.company_name)</th>
+                                <td>
+                                    @Html.EditorFor(model => model.company_name)
+                                    @Html.ValidationMessageFor(model => model.company_name, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>@Html.LabelFor(model => model.country)</th>
+                                <td>
+                                    @Html.EditorFor(model => model.country)
+                                    @Html.ValidationMessageFor(model => model.country, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>@Html.LabelFor(model => model.city)</th>
+                                <td>
+                                    @Html.EditorFor(model => model.city)
+                                    @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>@Html.LabelFor(model => model.region)</th>
+                                <td>
+                                    @Html.EditorFor(model => model.region)
+                                    @Html.ValidationMessageFor(model => model.region, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>@Html.LabelFor(model => model.address)</th>
+                                <td>
+                                    @Html.EditorFor(model => model.address)
+                                    @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>@Html.LabelFor(model => model.phone)</th>
+                                <td>
+                                    @Html.EditorFor(model => model.phone)
+                                    @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>@Html.LabelFor(model => model.postal_code)</th>
+                                <td>
+                                    @Html.EditorFor(model => model.postal_code)
+                                    @Html.ValidationMessageFor(model => model.postal_code, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>تعديل / حذف</th>
+                                <td>
+                                    <input class="big" type="submit" value="تعديل">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!--Partial Aside-->
+@Html.Partial("_account")
+<!--Partial Aside-->

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<OnLineShop.Models.tb_products>
+
+@{
+    ViewBag.Title = "جميع المنتجات";
+    Layout = "~/Views/Shared/_ControlPanalLayout.cshtml";
+}
+
+
+<section class="main-content col-lg-12 col-md-12 col-sm-12">
+
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 register-account">
+
+            <div class="carousel-heading no-margin">
+                جميع المنتجات
+            </div>
+            <table class="table table-stripped table-bordered table-hover">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.image)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tb_Categories.cat_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tb_Users.fullname)
+                    </th>
+                    <th>تعديل/حذف</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.title)
+                        </td>
+                        <td>
+                            <img src="~/uploads/@Html.DisplayFor(modelItem => item.image)"  class="thumbnail" style="margin: auto;width:70px; height:70px" >
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tb_Categories.cat_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tb_Users.fullname)
+                        </td>
+                        <td>
+                            @Html.ActionLink("تعديل", "EditProduct", new { id = item.id }) |
+                            @Html.ActionLink("حذف", "DeleteProduct", new { id = item.id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</section>

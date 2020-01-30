@@ -1,0 +1,26 @@
+﻿@using OnLineShop.Models;
+<nav class="col-lg-5 col-md-5 col-sm-5">
+    <ul class="pull-left">
+
+        @if (User.Identity.Name != "")
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoff" }))
+            {
+                OnlineShopDBEntities db = new OnlineShopDBEntities();
+                var UserName = User.Identity.Name;
+                var CurrentUser = db.tb_Users.Where(a => a.username == UserName).SingleOrDefault();
+                @Html.AntiForgeryToken()
+
+                <li>أهلا بك : @CurrentUser.fullname</li>
+
+                <li><a href="/Account/Profile"><i class="icons icon-lock"></i> إدارة الحساب</a></li>
+                <li><a href="Javascript:document.getElementById('logoff').submit()"><i class="icons icon-lock"></i> تسجيل خروج</a></li>
+            }
+        }
+        else
+        {
+            <li><a href="~/Account/login"><i class="icons icon-lock"></i> تسجيل دخول</a></li>
+            <li><a href="~/Account/Register"><i class="icons icon-lock"></i> تسجيل حساب</a></li>
+        }
+    </ul>
+</nav>

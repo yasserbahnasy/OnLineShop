@@ -1,0 +1,57 @@
+﻿@model IEnumerable<OnLineShop.Models.tb_brands>
+
+@{
+    ViewBag.Title = "العلامات التجارية";
+    Layout = "~/Views/Shared/_ControlPanalLayout.cshtml";
+}
+
+
+<section class="main-content col-lg-12 col-md-12 col-sm-12">
+
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 register-account">
+
+            <div class="carousel-heading no-margin">
+                العلامات التجارية
+            </div>
+            <table class="table table-stripped table-bordered table-hover">
+                <tr>
+                    <th>
+                        إسم العلامة التجارية
+                    </th>
+                    <th>
+                        رابط العلامة التجارية
+                    </th>
+                    <th>
+                        صورة العلامة التجارية
+                    </th>
+                    <th>تعديل</th>
+                    <th>حذف</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.englishname)
+                        </td>
+                        <td>
+                            <img src="~/uploads/@Html.DisplayFor(modelItem => item.logo)"  class="thumbnail" style="width:80px; height:80px">
+                        </td>
+                        <td>
+                            @Html.ActionLink("تعديل", "EditBrand", new { id = item.id })
+                        </td>
+                        <td>
+                            @Html.ActionLink("حذف", "DeleteBrand", new { id = item.id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</section>

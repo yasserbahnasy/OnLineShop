@@ -1,0 +1,84 @@
+﻿@model OnLineShop.Models.tb_Users
+
+@{
+    ViewBag.Title = "تعديل بيانات المستخدم";
+    Layout = "~/Views/Shared/_ControlPanalLayout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.id)
+    <section class="main-content col-lg-12 col-md-12 col-sm-12">
+
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 register-account">
+
+                <div class="carousel-heading no-margin">
+                    <h4>تعديل بيانات المستخدم</h4>
+                </div>
+
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.fullname, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.fullname, new { htmlAttributes = new { @class = "form-control", @placeholder = "الإسم كامل" } })
+                            @Html.ValidationMessageFor(model => model.fullname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @placeholder = "البريد الإلكتروني" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", @placeholder = "كلمة السر" } })
+                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.type, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.DropDownList("type", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", @placeholder = "إسم المستخدم" } })
+                            @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <input class="big" type="submit" value="تعديل">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+   
+}

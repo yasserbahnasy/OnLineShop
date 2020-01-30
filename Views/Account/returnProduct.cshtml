@@ -1,0 +1,65 @@
+﻿@model OnLineShop.Models.tb_orderDetails
+
+@{
+    ViewBag.Title = "إرجاع المنتج";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="main-content col-lg-9 col-md-9 col-sm-9">
+
+    <div class="row">
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="carousel-heading no-margin">
+                <h4>إرجاع منتج</h4>
+            </div>
+            <div class="page-content">
+                <div class="row">
+                    @using (Html.BeginForm("returnProduct", "Account", FormMethod.Post, new { id = "returnProduct" }))
+                    {
+                        <input type="hidden" name="productId" value="@Html.DisplayFor(model => model.product_id)" />
+                        <input type="hidden" name="purchID" value="@Html.DisplayFor(model => model.check_id)" />
+                        <input type="hidden" name="userID" value="@Html.DisplayFor(model => model.user_id)" />
+                        <input type="hidden" name="quantity" value="@Html.DisplayFor(model => model.quantity)" />
+                        <table class="orderinfo-table">
+                            <tbody>
+                                <tr>
+                                    <th>كود الشحنة</th>
+                                    <td>@Html.DisplayFor(model => model.tb_checkout.check_code)</td>
+                                </tr>
+                                <tr>
+                                    <th>تاريخ شراء الشحنة</th>
+                                    <td>@Html.DisplayFor(model => model.tb_checkout.date)</td>
+                                </tr>
+                                <tr>
+                                    <th>إسم المنتج</th>
+                                    <td>@Html.DisplayFor(model => model.tb_products.title) جنيها مصريا</td>
+                                </tr>
+                                <tr>
+                                    <th>سعر المنتج</th>
+                                    <td><span class="red">@Html.DisplayFor(model => model.tb_products.price) جنيها مصريا</span></td>
+                                </tr>
+                                <tr>
+                                    <th>الكمية</th>
+                                    <td>@Html.DisplayFor(model => model.quantity)</td>
+                                </tr>
+                                <tr>
+                                    <th>سبب إرجاع المنتج</th>
+                                    <td><textarea name="text"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <input type="submit"  value="تأكيد إرجاع المنتج">
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+</section>
+
+
+<!--Partial Aside-->
+@Html.Partial("_account")
+<!--Partial Aside-->

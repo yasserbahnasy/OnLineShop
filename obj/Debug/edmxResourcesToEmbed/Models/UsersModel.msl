@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OnlineShopDBModelStoreContainer" CdmEntityContainer="OnlineShopDBEntities">
+    <EntitySetMapping Name="tb_Users">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.tb_Users">
+        <MappingFragment StoreEntitySet="tb_Users">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_roles">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.tb_roles">
+        <MappingFragment StoreEntitySet="tb_roles">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Categories">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.tb_Categories">
+        <MappingFragment StoreEntitySet="tb_Categories">
+          <ScalarProperty Name="cat_desc" ColumnName="cat_desc" />
+          <ScalarProperty Name="cat_icon" ColumnName="cat_icon" />
+          <ScalarProperty Name="cat_name" ColumnName="cat_name" />
+          <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_products">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.tb_products">
+        <MappingFragment StoreEntitySet="tb_products">
+          <ScalarProperty Name="brand_id" ColumnName="brand_id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_actions">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.tb_actions">
+        <MappingFragment StoreEntitySet="tb_actions">
+          <ScalarProperty Name="type_action" ColumnName="type_action" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_billinfo">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.tb_billinfo">
+        <MappingFragment StoreEntitySet="tb_billinfo">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="region" ColumnName="region" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="company_name" ColumnName="company_name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_ship">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.tb_ship">
+        <MappingFragment StoreEntitySet="tb_ship">
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="region" ColumnName="region" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="company_name" ColumnName="company_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_checkout">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.tb_checkout">
+        <MappingFragment StoreEntitySet="tb_checkout">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="check_code" ColumnName="check_code" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="ship_id" ColumnName="ship_id" />
+          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+          <ScalarProperty Name="total_price" ColumnName="total_price" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddCheckout" FunctionName="OnlineShopDBModel.Store.AddCheckout" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="OnlineShopDBModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="OnlineShopDBModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="OnlineShopDBModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="OnlineShopDBModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OnlineShopDBModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="OnlineShopDBModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OnlineShopDBModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="OnlineShopDBModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="OnlineShopDBModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="DeleteActionCart" FunctionName="OnlineShopDBModel.Store.DeleteActionCart" />
+    <EntitySetMapping Name="tb_orderDetails">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.tb_orderDetails">
+        <MappingFragment StoreEntitySet="tb_orderDetails">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="check_id" ColumnName="check_id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="MostParch" FunctionName="OnlineShopDBModel.Store.MostParch">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OnlineShopDBModel.MostParch_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MostPurchases" FunctionName="OnlineShopDBModel.Store.MostParch" />
+    <EntitySetMapping Name="tb_brands">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.tb_brands">
+        <MappingFragment StoreEntitySet="tb_brands">
+          <ScalarProperty Name="logo" ColumnName="logo" />
+          <ScalarProperty Name="englishname" ColumnName="englishname" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_reterned">
+      <EntityTypeMapping TypeName="OnlineShopDBModel.tb_reterned">
+        <MappingFragment StoreEntitySet="tb_reterned">
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="check_id" ColumnName="check_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="bestsellers" FunctionName="OnlineShopDBModel.Store.bestsellers" />
+    <FunctionImportMapping FunctionImportName="bestseller" FunctionName="OnlineShopDBModel.Store.bestsellers" />
+  </EntityContainerMapping>
+</Mapping>

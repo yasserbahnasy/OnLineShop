@@ -1,0 +1,29 @@
+﻿body {
+}
+
+.container {
+    width: 98%;
+    padding: 0 30px;
+}
+
+.content {
+    background-color:white;
+    margin-right: 0;
+}
+
+.sidebar-box-content > ul > li {
+    text-align: right;
+}
+
+.main-content table {
+    width: 100%;
+    direction: rtl;
+}
+
+.main-content table th ,.main-content table td {
+text-align: center; 
+}
+
+.form-group{
+    margin-top: 15px;
+}

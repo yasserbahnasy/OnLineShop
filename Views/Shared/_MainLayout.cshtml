@@ -1,0 +1,453 @@
+﻿@using OnLineShop.Models;
+<!DOCTYPE html>
+<html>
+    <head>
+        @RenderSection("head", required: false)
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@ViewBag.Title</title>
+        
+        <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,900,700italic,500italic' rel='stylesheet' type='text/css'>
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="~/content/bootstrap.min.css">
+        <link rel="stylesheet" href="~/content/perfect-scrollbar.css">
+        <link rel="stylesheet" href="~/content/style.css">
+        <link rel="stylesheet" href="~/content/flexslider.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="~/content/fontello.css">
+        <link rel="stylesheet" type="text/css" href="~/content/settings.css" media="screen" />
+        <link rel="stylesheet" href="~/content/animation.css">
+        <link rel="stylesheet" href="~/content/owl.carousel.css">
+        <link rel="stylesheet" href="~/content/owl.theme.css">
+        <link rel="stylesheet" href="~/content/chosen.css">
+    </head>
+    <body>
+        <div class="container">
+            <!-- Header -->
+            <header class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                    <!-- Top Header -->
+                    <div id="top-header">
+
+                        <div class="row">
+
+                            <nav id="top-navigation" class="col-lg-7 col-md-7 col-sm-7">
+                                <ul class="pull-right">
+                                    <li><a href="/Account/Profile">حسابي</a></li>
+                                    <li><a href="/Account/shopping_cart">عربة التسوق</a></li>
+                                    <li><a href="/Account/wishlist">المنتجات المفضلة</a></li>
+                                    <li><a href="/Home/aboutus">نبذة عنا</a></li>
+                                    <li><a href="/Home/contact">إتصل بنا</a></li>
+                                </ul>
+                            </nav>
+
+                            <!--Partial Login-->
+                            @Html.Partial("_login")
+                            <!--Partial Login-->
+
+                        </div>
+
+                    </div>
+                    <!-- /Top Header -->
+                    <!-- Main Header -->
+                    <div id="main-header">
+
+                        <div class="row">
+
+                            <div id="logo" class="col-lg-4 col-md-4 col-sm-4">
+                                <a href="/"><img src="~/images/logo.png" alt="Logo"></a>
+                            </div>
+
+                            <nav id="middle-navigation" class="col-lg-8 col-md-8 col-sm-8">
+                                <ul class="pull-left">
+                                    @if (User.Identity.Name != "")
+                                    {
+                                        OnlineShopDBEntities db = new OnlineShopDBEntities();
+                                        var UserName = User.Identity.Name;
+                                        var CurrentUser = db.tb_Users.Where(a => a.username == UserName).SingleOrDefault();
+                                        var UserActionsWishList = db.tb_actions.Where(a => a.user_id == CurrentUser.id && a.type_action == "WishList").Count();
+                                        var UserActionsCart = db.tb_actions.Where(a => a.user_id == CurrentUser.id && a.type_action == "Cart").ToList();
+                                        
+                                        @Html.AntiForgeryToken()
+
+                                        <li class="red">
+                                            <a href="/Account/wishlist"><i class="icons icon-heart-empty"></i>@UserActionsWishList منتج</a>
+                                        </li>
+                                        <li class="orange">
+                                            <a href="/Account/shopping_cart"><i class="icons icon-basket-2"></i>@UserActionsCart.Count() منتج</a>
+                                            <ul id="cart-dropdown" class="box-dropdown parent-arrow">
+                                                <li>
+                                                    
+                                                        <div class="box-wrapper parent-border">
+                                                            <p>المنتجات المضافة مؤخراً</p>
+
+                                                            <table class="cart-table">
+                                                                @foreach (var subItem in UserActionsCart)
+                                                                {
+                                                                <tr>
+                                                                    <td><img class="thumbnail" src="/uploads/@subItem.tb_products.image" alt="@subItem.tb_products.title" style="width:70px; height:70px"></td>
+                                                                    <td>
+                                                                        <h6>@subItem.tb_products.title</h6>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span class="quantity"><span class="light">@subItem.tb_products.quantity x</span> @subItem.tb_products.price EGP</span>
+                                                                        <a href = "#" class="parent-color">Remove</a>
+                                                                    </td>
+                                                                </tr>
+                                                                }
+                                                            </table>
+
+                                                            <br class="clearfix">
+                                                        </div>
+
+                                                        <div class="footer">
+                                                            <table class="checkout-table pull-right">
+                                                                <tr>
+                                                                    <td class="align-right">Tax:</td>
+                                                                    <td>$0.00</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="align-right">Discount:</td>
+                                                                    <td>$37.00</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="align-right"><strong>Total:</strong></td>
+                                                                    <td><strong class="parent-color">@UserActionsCart.</strong></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+
+                                                        <div class="box-wrapper no-border">
+                                                        <a class="button pull-right parent-background" href="#">Checkout</a>
+                                                        <a class="button pull-right" href="order_info.html">View Cart</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="red">
+                                            <a href="/Account/wishlist"><i class="icons icon-heart-empty"></i>0 منتج</a>
+                                        </li>
+
+                                        <li class="orange">
+                                            <a href="/Account/shopping_cart"><i class="icons icon-basket-2"></i>0 منتج</a>
+                                        </li>
+                                    }
+                                    
+                                    <li>
+                                        <a class="flag" href="#"><i class="icons icon-flag"></i>مصر</a>            
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="icons icon-pound"></i>جنيها مصرياً</a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+
+                    </div>
+                    <!-- /Main Header -->
+                    <!-- Main Navigation -->
+                    <nav id="main-navigation" class="style1">
+                        <ul>
+
+                            <li class="home-green current-item">
+                                <a href="/">
+                                    <i class="icons icon-shop-1"></i>
+                                    <span class="nav-caption">الرئيسية</span>
+                                    <span class="nav-description">الصفحة الرئيسية</span>
+                                </a>
+
+                            </li>
+
+                            <li class="red">
+                                <a href="category_v1.html">
+                                    <i class="icons icon-tag"></i>
+                                    <span class="nav-caption">الأقسام</span>
+                                    <span class="nav-description">جميع أقسام الموقع</span>
+                                </a>
+
+                                <ul class="wide-dropdown normalAniamtion">
+                                    <li>
+                                        <ul>
+                                            @{
+                                                OnlineShopDBEntities dba = new OnlineShopDBEntities();
+                                                var Categories = dba.tb_Categories.ToList();
+                                                foreach (var item in Categories)
+                                                {
+                                                    <li><a href="/category/@item.cat_name.ToString().Replace(" ", "-")"><i class="@item.cat_icon"></i> @item.cat_name</a></li>
+                                                }
+                                            }
+                                            
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                            </li>
+
+                            <li class="blue">
+                                <a href="/category/كمبيوترات">
+                                    <i class="icons icon-desktop-3"></i>
+                                    <span class="nav-caption">كمبيوتر</span>
+                                    <span class="nav-description">أجهزة كمبيوتر</span>
+                                </a>
+                            </li>
+
+                            <li class="orange">
+                                <a href="/category/موبايلات">
+                                    <i class="icons icon-mobile-6"></i>
+                                    <span class="nav-caption">الموبيلات</span>
+                                    <span class="nav-description">الهواتف المحمولة</span>
+                                </a>
+                            </li>
+
+                            <li class="green">
+                                <a href="/category/الأجهزة-منزلية">
+                                    <i class="icons icon-food"></i>
+                                    <span class="nav-caption">الأجهزة المنزلية</span>
+                                    <span class="nav-description">جميع أجهزة المنزل</span>
+                                </a>
+                            </li>
+
+                            <li class="purple">
+                                <a href="/contact">
+                                    <i class="icons icon-location-7"></i>
+                                    <span class="nav-caption">إتصل بنا</span>
+                                    <span class="nav-description">طرق التواصل معنا</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-search">
+                                <i class="icons icon-search-1"></i>
+                            </li>
+
+                        </ul>
+
+                        <div id="search-bar">
+                           
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <table id="search-bar-table">
+                                    <tr>
+                                        <td class="search-column-1">
+                                            <p><span class="grey">أشهر نتائج البحث:</span> <a href="#">الموبيلات</a>, <a href="#">الأجهزة المنزلية</a>, <a href="#">الكاميرات</a>, <a href="#">الاب توب</a>,  <a href="#">المزيد</a></p>
+                                            <input type="text" name="SearchName" id="SearchName" placeholder="إكتب كلمة البحث ...">
+                                        </td>
+                                        <td class="search-column-2">
+                                            <p class="align-right"><a href="#">إختار القسم</a></p>
+                                            @{
+
+                                            OnlineShopDBEntities dbs = new OnlineShopDBEntities();
+                                            var AllCategories = dbs.tb_Categories.ToList();
+
+                                                <select class="form-control" name="categoryID" id="categoryID">
+                                                    <option value="0" selected="selected">كل الأقسام</option>
+                                                    @foreach (var item in AllCategories)
+                                                    {
+                                                        <option value="@item.cat_id">@item.cat_name</option>
+                                                    }
+                                                </select>
+                                            }
+                                            
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="search-button">
+                                <input type="submit" id="SearchBTN" name="SearchBTN" value="">
+                                <i class="icons icon-search-1"></i>
+                            </div>
+                           
+                        </div>
+                        
+                    </nav>
+                    <!-- /Main Navigation -->
+
+                </div>
+
+            </header>
+            <!-- /Header -->
+            <div class="row content">
+                @RenderBody()
+
+            </div>
+            <!-- Footer -->
+            <footer id="footer" class="row">
+
+                <!-- Upper Footer -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                    <div id="upper-footer">
+
+                        <div class="row">
+
+                            <!-- Newsletter -->
+                            <div class="col-lg-7 col-md-7 col-sm-7">
+                                <form id="newsletter" action="php/newsletter.php">
+                                    <h4>التسجيل في النشرة البريدية</h4>
+                                    <input type="text" name="newsletter-email" placeholder="أدخل البريد الإلكتروني">
+                                    <input type="submit" name="newsletter-submit" value="إضافة">
+                                </form>
+                            </div>
+                            <!-- /Newsletter -->
+                            <!-- Social Media -->
+                            <div class="col-lg-5 col-md-5 col-sm-5 social-media">
+                                <h4>إبقي علي إتصال</h4>
+                                <ul>
+                                    <li class="social-googleplus tooltip-hover" data-toggle="tooltip" data-placement="top" title="Google+"><a href="#"></a></li>
+                                    <li class="social-facebook tooltip-hover" data-toggle="tooltip" data-placement="top" title="Facebook"><a href="#"></a></li>
+                                    <li class="social-pinterest tooltip-hover" data-toggle="tooltip" data-placement="top" title="Pinterest"><a href="#"></a></li>
+                                    <li class="social-twitter tooltip-hover" data-toggle="tooltip" data-placement="top" title="Twitter"><a href="#"></a></li>
+                                    <li class="social-youtube tooltip-hover" data-toggle="tooltip" data-placement="top" title="Youtube"><a href="#"></a></li>
+                                </ul>
+                            </div>
+                            <!-- /Social Media -->
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /Upper Footer -->
+                <!-- Main Footer -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                    <div id="main-footer">
+
+                        <div class="row">
+
+                            <!-- The Service -->
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <h4>الخدمات</h4>
+                                <ul>
+                                    <li><a href="#"><i class="icons icon-left-dir"></i> حسابي</a></li>
+                                    <li><a href="#"><i class="icons icon-left-dir"></i> قائمة الطلبات</a></li>
+                                    <li><a href="#"><i class="icons icon-left-dir"></i> إتصل بنا</a></li>
+                                    <li><a href="#"><i class="icons icon-left-dir"></i> صفحة التسوق</a></li>
+                                    <li><a href="#"><i class="icons icon-left-dir"></i> الأقسام</a></li>
+                                    <li><a href="#"><i class="icons icon-left-dir"></i> نتائج البحث</a></li>
+                                </ul>
+                            </div>
+                            <!-- /The Service -->
+                            <!-- Like us on Facebook -->
+                            <div class="col-lg-3 col-md-3 col-sm-6 facebook-iframe">
+                                <h4>إشترك في صفحة الفيس بوك</h4>
+                                <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FFacebookDevelopers&amp;width=270&amp;height=250&amp;colorscheme=light&amp;header=false&amp;show_faces=true&amp;stream=false&amp;show_border=false" style="border:none; overflow:hidden; width:100%; height:290px;"></iframe>
+                            </div>
+                            <!-- /Like us on Facebook -->
+                            <!-- Information -->
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <h4>معلومات</h4>
+                                <ul>
+                                    <li><a href="#"><i class="icons icon-left-dir"></i> نبذة عننا</a></li>
+                                    <li><a href="#"><i class="icons icon-left-dir"></i> منتجات جديدة</a></li>
+                                    <li><a href="#"><i class="icons icon-left-dir"></i> أفضل المبيعات</a></li>
+                                    <li><a href="#"><i class="icons icon-left-dir"></i> الحقوق الملكية</a></li>
+                                </ul>
+                            </div>
+                            <!-- /Information -->
+                            <!-- Contact Us -->
+                            <div class="col-lg-3 col-md-3 col-sm-6 contact-footer-info">
+                                <h4>إتصل بنا</h4>
+                                <ul>
+                                    <li><i class="icons icon-location"></i> مصر,الإسكندرية.</li>
+                                    <li><i class="icons icon-phone"></i> 0201000000</li>
+                                    <li><i class="icons icon-mail-alt"></i><a href="mailto:mail@company.com"> mail@companyname.com</a></li>
+                                    <li><i class="icons icon-skype"></i> Skype</li>
+                                </ul>
+                            </div>
+                            <!-- /Contact Us -->
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /Main Footer -->
+                <!-- Lower Footer -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                    <div id="lower-footer">
+
+                        <div class="row">
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <p class="copyright">جميع الحقوق محفوظة 2019 <a href="#">التسوق أون لاين</a></p>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <ul class="payment-list">
+                                    <li class="payment1"></li>
+                                    <li class="payment2"></li>
+                                    <li class="payment3"></li>
+                                    <li class="payment4"></li>
+                                    <li class="payment5"></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /Lower Footer -->
+
+            </footer>
+            <!-- Footer -->
+
+            <div id="back-to-top">
+                <i class="icon-up-dir"></i>
+            </div>
+
+            
+        </div>
+
+        <!-- JavaScript -->
+        <script src="~/scripts/modernizr.min.js"></script>
+        <script src="~/scripts/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="~/scripts/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="~/scripts/jquery.raty.min.js"></script>
+
+        <!-- Scroll Bar -->
+        <script src="~/scripts/perfect-scrollbar.min.js"></script>
+
+        <!-- Cloud Zoom -->
+        <script src="~/scripts/zoomsl-3.0.min.js"></script>
+
+        <!-- FancyBox -->
+        <script src="~/scripts/jquery.fancybox.pack.js"></script>
+
+        <!-- jQuery REVOLUTION Slider  -->
+        <script type="text/javascript" src="~/scripts/jquery.themepunch.plugins.min.js"></script>
+        <script type="text/javascript" src="~/scripts/jquery.themepunch.revolution.min.js"></script>
+
+        <!-- FlexSlider -->
+        <script defer src="~/scripts/flexslider.min.js"></script>
+
+        <!-- IOS Slider -->
+        <script src="~/scripts/jquery.iosslider.min.js"></script>
+
+        <!-- noUi Slider -->
+        <script src="~/scripts/jquery.nouislider.min.js"></script>
+
+        <!-- Owl Carousel -->
+        <script src="~/scripts/owl.carousel.min.js"></script>
+
+        <!-- Cloud Zoom -->
+        <script src="~/scripts/zoomsl-3.0.min.js"></script>
+
+        <!-- SelectJS -->
+        <script src="~/scripts/chosen.jquery.min.js" type="text/javascript"></script>
+
+        <!-- Main JS -->
+        <script defer src="~/scripts/bootstrap.min.js"></script>
+        <script src="~/scripts/main-script.js"></script>
+        <script src="~/scripts/MyScripts.js"></script>
+
+</body>
+</html>

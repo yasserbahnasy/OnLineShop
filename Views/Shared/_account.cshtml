@@ -1,0 +1,41 @@
+﻿@using OnLineShop.Models;
+<aside class="sidebar right-sidebar col-lg-3 col-md-3 col-sm-3">
+
+    <!-- Categories -->
+    <div class="row sidebar-box purple">
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <div class="sidebar-box-heading">
+                <i class="icons icon-folder-open-empty"></i>
+                @{
+                    OnlineShopDBEntities db = new OnlineShopDBEntities();
+                    var UserName = User.Identity.Name;
+                    var DetailsUser = db.tb_Users.Where(a => a.username == UserName).SingleOrDefault();
+
+                    <h4>@DetailsUser.fullname</h4>
+                }
+                
+            </div>
+
+            <div class="sidebar-box-content">
+                <ul>
+                    <li><a href="/Account/settings">إعدادات الحساب <i class="icons icon-left-dir"></i></a></li>
+                    <li><a href="/Account/AddBillInfo">إضافة طريقة دفع <i class="icons icon-left-dir"></i></a></li>
+                    <li><a href="/Account/BillInfo">قائمة طريقة الدفع <i class="icons icon-left-dir"></i></a></li>
+                    <li><a href="/Account/AddShipInfo">إضافة عنوان شحن <i class="icons icon-left-dir"></i></a></li>
+                    <li><a href="/Account/ShipInfo">قائمة عنواين الشحن <i class="icons icon-left-dir"></i></a></li>
+                    <li><a href="/Account/purchases">مشترياتي <i class="icons icon-left-dir"></i></a></li>
+                    <li><a href="/Account/wishlist">المنتجات المفضلة <i class="icons icon-left-dir"></i></a></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /Categories -->
+
+
+
+</aside>
+

@@ -1,0 +1,458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OnlineShopDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tb_actions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="type_action" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_billinfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="80" />
+    <Property Name="company_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="fullname" Type="nvarchar" MaxLength="100" />
+    <Property Name="address" Type="nvarchar" MaxLength="200" />
+    <Property Name="postal_code" Type="int" />
+    <Property Name="city" Type="nvarchar" MaxLength="50" />
+    <Property Name="country" Type="nvarchar" MaxLength="50" />
+    <Property Name="phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="region" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_id" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_brands">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="englishname" Type="nvarchar" MaxLength="50" />
+    <Property Name="logo" Type="nvarchar" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="tb_Categories">
+    <Key>
+      <PropertyRef Name="cat_id" />
+    </Key>
+    <Property Name="cat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cat_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="cat_icon" Type="nvarchar" MaxLength="50" />
+    <Property Name="cat_desc" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tb_checkout">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="total_price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="bill_id" Type="int" />
+    <Property Name="ship_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="check_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_orderDetails">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="check_id" Type="int" />
+    <Property Name="type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_products">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+    <Property Name="description" Type="text" />
+    <Property Name="image" Type="nvarchar" MaxLength="50" />
+    <Property Name="category_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="brand_id" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_reterned">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="check_id" Type="int" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="text" Type="text" />
+    <Property Name="quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_roles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_ship">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="company_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="fullname" Type="nvarchar" MaxLength="50" />
+    <Property Name="address" Type="nvarchar" MaxLength="150" />
+    <Property Name="postal_code" Type="int" />
+    <Property Name="country" Type="nvarchar" MaxLength="50" />
+    <Property Name="phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="region" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="city" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_Users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="fullname" Type="nvarchar" MaxLength="50" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="type" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="active" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__tb_produc__categ__182C9B23">
+    <End Role="tb_Categories" Type="Self.tb_Categories" Multiplicity="0..1" />
+    <End Role="tb_products" Type="Self.tb_products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Categories">
+        <PropertyRef Name="cat_id" />
+      </Principal>
+      <Dependent Role="tb_products">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_produc__user___1920BF5C">
+    <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="0..1" />
+    <End Role="tb_products" Type="Self.tb_products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_products">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_actions_tb_products">
+    <End Role="tb_products" Type="Self.tb_products" Multiplicity="0..1" />
+    <End Role="tb_actions" Type="Self.tb_actions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_actions">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_actions_tb_Users">
+    <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="0..1" />
+    <End Role="tb_actions" Type="Self.tb_actions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_actions">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_billinfo_tb_Users">
+    <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="0..1" />
+    <End Role="tb_billinfo" Type="Self.tb_billinfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_billinfo">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_checkout_tb_billinfo">
+    <End Role="tb_billinfo" Type="Self.tb_billinfo" Multiplicity="0..1" />
+    <End Role="tb_checkout" Type="Self.tb_checkout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_billinfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_checkout">
+        <PropertyRef Name="bill_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_checkout_tb_ship">
+    <End Role="tb_ship" Type="Self.tb_ship" Multiplicity="0..1" />
+    <End Role="tb_checkout" Type="Self.tb_checkout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_ship">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_checkout">
+        <PropertyRef Name="ship_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_checkout_tb_Users">
+    <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="0..1" />
+    <End Role="tb_checkout" Type="Self.tb_checkout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_checkout">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_orderDetails_tb_checkout">
+    <End Role="tb_checkout" Type="Self.tb_checkout" Multiplicity="0..1" />
+    <End Role="tb_orderDetails" Type="Self.tb_orderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_checkout">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_orderDetails">
+        <PropertyRef Name="check_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_orderDetails_tb_products">
+    <End Role="tb_products" Type="Self.tb_products" Multiplicity="0..1" />
+    <End Role="tb_orderDetails" Type="Self.tb_orderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_orderDetails">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_orderDetails_tb_Users">
+    <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="0..1" />
+    <End Role="tb_orderDetails" Type="Self.tb_orderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_orderDetails">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_products_tb_brands">
+    <End Role="tb_brands" Type="Self.tb_brands" Multiplicity="0..1" />
+    <End Role="tb_products" Type="Self.tb_products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_brands">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_products">
+        <PropertyRef Name="brand_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_reterned_tb_checkout">
+    <End Role="tb_checkout" Type="Self.tb_checkout" Multiplicity="0..1" />
+    <End Role="tb_reterned" Type="Self.tb_reterned" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_checkout">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_reterned">
+        <PropertyRef Name="check_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_reterned_tb_products">
+    <End Role="tb_products" Type="Self.tb_products" Multiplicity="0..1" />
+    <End Role="tb_reterned" Type="Self.tb_reterned" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_reterned">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_reterned_tb_Users">
+    <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="0..1" />
+    <End Role="tb_reterned" Type="Self.tb_reterned" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_reterned">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_ship_tb_Users">
+    <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="0..1" />
+    <End Role="tb_ship" Type="Self.tb_ship" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_ship">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddCheckout" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="date" Type="datetime" Mode="In" />
+    <Parameter Name="total_price" Type="decimal" Mode="In" />
+    <Parameter Name="bill_id" Type="int" Mode="In" />
+    <Parameter Name="ship_id" Type="int" Mode="In" />
+    <Parameter Name="user_id" Type="int" Mode="In" />
+    <Parameter Name="check_code" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="bestsellers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="DeleteActionCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="type_action" Type="nvarchar" Mode="In" />
+    <Parameter Name="user_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="MostParch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="OnlineShopDBModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_actions" EntityType="Self.tb_actions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_billinfo" EntityType="Self.tb_billinfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_brands" EntityType="Self.tb_brands" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Categories" EntityType="Self.tb_Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_checkout" EntityType="Self.tb_checkout" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_orderDetails" EntityType="Self.tb_orderDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_products" EntityType="Self.tb_products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_reterned" EntityType="Self.tb_reterned" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_roles" EntityType="Self.tb_roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_ship" EntityType="Self.tb_ship" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Users" EntityType="Self.tb_Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tb_produc__categ__182C9B23" Association="Self.FK__tb_produc__categ__182C9B23">
+      <End Role="tb_Categories" EntitySet="tb_Categories" />
+      <End Role="tb_products" EntitySet="tb_products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_produc__user___1920BF5C" Association="Self.FK__tb_produc__user___1920BF5C">
+      <End Role="tb_Users" EntitySet="tb_Users" />
+      <End Role="tb_products" EntitySet="tb_products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_actions_tb_products" Association="Self.FK_tb_actions_tb_products">
+      <End Role="tb_products" EntitySet="tb_products" />
+      <End Role="tb_actions" EntitySet="tb_actions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_actions_tb_Users" Association="Self.FK_tb_actions_tb_Users">
+      <End Role="tb_Users" EntitySet="tb_Users" />
+      <End Role="tb_actions" EntitySet="tb_actions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_billinfo_tb_Users" Association="Self.FK_tb_billinfo_tb_Users">
+      <End Role="tb_Users" EntitySet="tb_Users" />
+      <End Role="tb_billinfo" EntitySet="tb_billinfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_checkout_tb_billinfo" Association="Self.FK_tb_checkout_tb_billinfo">
+      <End Role="tb_billinfo" EntitySet="tb_billinfo" />
+      <End Role="tb_checkout" EntitySet="tb_checkout" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_checkout_tb_ship" Association="Self.FK_tb_checkout_tb_ship">
+      <End Role="tb_ship" EntitySet="tb_ship" />
+      <End Role="tb_checkout" EntitySet="tb_checkout" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_checkout_tb_Users" Association="Self.FK_tb_checkout_tb_Users">
+      <End Role="tb_Users" EntitySet="tb_Users" />
+      <End Role="tb_checkout" EntitySet="tb_checkout" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_orderDetails_tb_checkout" Association="Self.FK_tb_orderDetails_tb_checkout">
+      <End Role="tb_checkout" EntitySet="tb_checkout" />
+      <End Role="tb_orderDetails" EntitySet="tb_orderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_orderDetails_tb_products" Association="Self.FK_tb_orderDetails_tb_products">
+      <End Role="tb_products" EntitySet="tb_products" />
+      <End Role="tb_orderDetails" EntitySet="tb_orderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_orderDetails_tb_Users" Association="Self.FK_tb_orderDetails_tb_Users">
+      <End Role="tb_Users" EntitySet="tb_Users" />
+      <End Role="tb_orderDetails" EntitySet="tb_orderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_products_tb_brands" Association="Self.FK_tb_products_tb_brands">
+      <End Role="tb_brands" EntitySet="tb_brands" />
+      <End Role="tb_products" EntitySet="tb_products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_reterned_tb_checkout" Association="Self.FK_tb_reterned_tb_checkout">
+      <End Role="tb_checkout" EntitySet="tb_checkout" />
+      <End Role="tb_reterned" EntitySet="tb_reterned" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_reterned_tb_products" Association="Self.FK_tb_reterned_tb_products">
+      <End Role="tb_products" EntitySet="tb_products" />
+      <End Role="tb_reterned" EntitySet="tb_reterned" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_reterned_tb_Users" Association="Self.FK_tb_reterned_tb_Users">
+      <End Role="tb_Users" EntitySet="tb_Users" />
+      <End Role="tb_reterned" EntitySet="tb_reterned" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_ship_tb_Users" Association="Self.FK_tb_ship_tb_Users">
+      <End Role="tb_Users" EntitySet="tb_Users" />
+      <End Role="tb_ship" EntitySet="tb_ship" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

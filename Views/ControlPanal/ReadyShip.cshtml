@@ -1,0 +1,42 @@
+﻿@model IEnumerable<OnLineShop.Models.tb_checkout>
+
+@{
+    ViewBag.Title = "شحنات جاهزة للشحن";
+    Layout = "~/Views/Shared/_ControlPanalLayout.cshtml";
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.check_code)
+        </th>
+        <th>
+            عنوان الشحن
+        </th>
+        <th>
+            التفاصيل
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.check_code)
+        </td>
+        <td>
+            @item.tb_ship.country , @item.tb_ship.city , @item.tb_ship.region , @item.tb_ship.address 
+        </td>
+        <td>
+            @Html.ActionLink("التفاصيل", "DetailsShip", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

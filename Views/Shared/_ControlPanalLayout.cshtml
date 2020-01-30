@@ -1,0 +1,188 @@
+﻿@using OnLineShop.Models;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,900,700italic,500italic' rel='stylesheet' type='text/css'>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="~/content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/content/perfect-scrollbar.css">
+    <link rel="stylesheet" href="~/content/style.css">
+    <link href="~/content/ControlPanalStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/content/flexslider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/content/fontello.css">
+    <link rel="stylesheet" type="text/css" href="~/content/settings.css" media="screen" />
+    <link rel="stylesheet" href="~/content/animation.css">
+    <link rel="stylesheet" href="~/content/owl.carousel.css">
+    <link rel="stylesheet" href="~/content/owl.theme.css">
+    <link rel="stylesheet" href="~/content/chosen.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.default.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container">
+        <div class="col-lg-9 col-md-9 col-sm-9 float-left">
+            <header class="row">
+                <div id="top-header">
+                    <div class="row">
+@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoff" }))
+{
+    
+    @Html.AntiForgeryToken()
+    OnlineShopDBEntities db = new OnlineShopDBEntities();
+    var UserName = User.Identity.Name;
+    var CurrentUser = db.tb_Users.Where(a => a.username == UserName).SingleOrDefault();
+    
+
+                        <nav id="top-navigation" class="col-lg-7 col-md-7 col-sm-7 float-left">
+                            <ul class="pull-left">
+                                <li><a href="Javascript:document.getElementById('logoff').submit()">تسجيل الخروج</a></li>
+                            </ul>
+                        </nav>
+                        <nav class="col-lg-5 col-md-5 col-sm-5 float-right">
+                            <ul class="pull-right">
+                                <li><a href="/">الصفحة الرئيسية</a></li>
+                                <li>أهلا بك : @CurrentUser.fullname</li>
+                            </ul>
+                        </nav>
+                    
+}
+                    </div>
+                </div>
+        </header>
+    
+       
+        <div class="row content col-lg-12 col-md-12 col-sm-12">
+            @RenderBody()
+        </div>
+      </div>
+        <aside class="sidebar right-sidebar col-lg-3 col-md-3 col-sm-3">
+            <div class="row sidebar-box purple">
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="sidebar-box-heading">
+                        <i class="icons icon-folder-open-empty"></i>
+                        <h4>لوحة التحكم</h4>
+                    </div>
+                    <div class="sidebar-box-content">
+                        <ul>
+                            <li>
+                                <a>المنتجات <i class="icons icon-left-dir"></i></a>
+                                <ul class="sidebar-dropdown">
+                                    <li>
+                                        <ul>
+                                            <li><a href="/ControlPanal/Products">جميع المنتجات</a></li>
+                                            <li><a href="/ControlPanal/MyProducts">جميع المنتجات الخاصة بي</a></li>
+                                            <li><a href="/ControlPanal/AddProduct">إضافة منتج جديد</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                               
+                            </li>
+                            <li>
+                                <a>أقسام الموقع <i class="icons icon-left-dir"></i></a>
+                                <ul class="sidebar-dropdown">
+                                    <li>
+                                        <ul>
+                                            <li><a href="/ControlPanal/Categories">جميع الأقسام</a></li>
+                                            <li><a href="/ControlPanal/AddCategory">إنشاء قسم جديد</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a>الشحن <i class="icons icon-left-dir"></i></a>
+                                <ul class="sidebar-dropdown">
+                                    <li>
+                                        <ul>
+                                            <li><a href="/ControlPanal/ReadyShip">منتجات جاهزة للشحنس</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a>العلامات التجارية <i class="icons icon-left-dir"></i></a>
+                                <ul class="sidebar-dropdown">
+                                    <li>
+                                        <ul>
+                                            <li><a href="/ControlPanal/Brands">جميع العلامات التجارية</a></li>
+                                            <li><a href="/ControlPanal/AddBrand">إنشاء علامة جديدة</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="/ControlPanal/MostParch">أكثر المنتجات مبيعاً <i class="icons icon-left-dir"></i></a></li>
+                            <li><a href="/ControlPanal/NoQProduct">المنتجات التي غير متوفرة <i class="icons icon-left-dir"></i></a></li>
+                            <li>
+                                <a>المستخدمين <i class="icons icon-left-dir"></i></a>
+                                <ul class="sidebar-dropdown">
+                                    <li>
+                                        <ul>
+                                            <li><a href="/ControlPanal/Users">جميع المستخدمين</a></li>
+                                            <li><a href="/ControlPanal/addNewUser">إنشاء مستخدك جديد</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="/ControlPanal/EditInformation">تعديل بيانات الحساب <i class="icons icon-left-dir"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </aside>
+
+    </div>
+        <!-- JavaScript -->
+        <script src="~/scripts/modernizr.min.js"></script>
+        <script src="~/scripts/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="~/scripts/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="~/scripts/jquery.raty.min.js"></script>
+
+        <!-- Scroll Bar -->
+        <script src="~/scripts/perfect-scrollbar.min.js"></script>
+
+        <!-- Cloud Zoom -->
+        <script src="~/scripts/zoomsl-3.0.min.js"></script>
+
+        <!-- FancyBox -->
+        <script src="~/scripts/jquery.fancybox.pack.js"></script>
+
+        <!-- jQuery REVOLUTION Slider  -->
+        <script type="text/javascript" src="~/scripts/jquery.themepunch.plugins.min.js"></script>
+        <script type="text/javascript" src="~/scripts/jquery.themepunch.revolution.min.js"></script>
+
+        <!-- FlexSlider -->
+        <script defer src="~/scripts/flexslider.min.js"></script>
+
+        <!-- IOS Slider -->
+        <script src="~/scripts/jquery.iosslider.min.js"></script>
+
+        <!-- noUi Slider -->
+        <script src="~/scripts/jquery.nouislider.min.js"></script>
+
+        <!-- Owl Carousel -->
+        <script src="~/scripts/owl.carousel.min.js"></script>
+
+        <!-- Cloud Zoom -->
+        <script src="~/scripts/zoomsl-3.0.min.js"></script>
+
+        <!-- SelectJS -->
+        <script src="~/scripts/chosen.jquery.min.js" type="text/javascript"></script>
+
+        <!-- Main JS -->
+        <script defer src="~/scripts/bootstrap.min.js"></script>
+        <script src="~/scripts/main-script.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.widgets.min.js"></script>
+        @RenderSection("scripts", required: false)
+        </body>
+</html>

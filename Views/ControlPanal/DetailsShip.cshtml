@@ -1,0 +1,56 @@
+﻿@model OnLineShop.Models.tb_checkout
+
+@{
+    ViewBag.Title = "شحنة جاهزة للشحن";
+    Layout = "~/Views/Shared/_ControlPanalLayout.cshtml";
+}
+
+<table class="table table-stripped table-bordered table-hover">
+    <tr>
+        <td>تاريخ الشراء</td>
+        <td>@Html.DisplayFor(model => model.date)</td>
+    </tr>
+    <tr>
+        <td>إجمالي المبلغ</td>
+        <td>@Html.DisplayFor(model => model.total_price)</td>
+    </tr>
+    <tr>
+        <td>كود الشحنة</td>
+        <td>@Html.DisplayFor(model => model.check_code)</td>
+    </tr>
+    
+    <tr>
+        <td>إسم المستلم</td>
+        <td>@Model.tb_ship.fullname </td>
+    </tr>
+    <tr>
+        <td>رقم الهاتف</td>
+        <td>@Model.tb_ship.phone </td>
+    </tr>
+
+    <tr>
+        <td>عنوان الشحنة</td>
+        <td>@Model.tb_ship.country , @Model.tb_ship.city , @Model.tb_ship.region , @Model.tb_ship.address </td>
+    </tr>
+    <tr>
+        <td>منتجات الشحنة</td>
+        <td>
+            <table class="table">
+                <tr>
+                    <td>إسم المنتج</td>
+                    <td>الكمية المطلوبة</td>
+                </tr>
+                @foreach (var item in Model.tb_orderDetails)
+                {
+                    <tr>
+                        <td>@item.tb_products.title</td>
+                        <td>@item.quantity</td>
+                    </tr>
+                }
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+@Html.ActionLink("تم الشحن", "DonShip", new { id = Model.id })

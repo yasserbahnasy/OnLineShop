@@ -1,0 +1,167 @@
+﻿@model IEnumerable<OnLineShop.Models.tb_checkout>
+@using OnLineShop.Models;
+@{
+    ViewBag.Title = "مشترياتي";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<section class="main-content col-lg-9 col-md-9 col-sm-9">
+
+<div class="row">
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+@foreach (var item in Model)
+{
+    OnlineShopDBEntities db = new OnlineShopDBEntities();
+    var orderDetails = db.tb_orderDetails.Where(a => a.check_id == @item.id && a.user_id == @item.user_id).ToList();
+    
+        
+            <div class="carousel-heading no-margin">
+                <h4>بيانات الشحنة</h4>
+            </div>
+            <div class="page-content">
+                <div class="row">
+                    <table class="orderinfo-table">
+                        <tr>
+                            <th>كود الشحنة</th>
+                            <td>@item.check_code</td>
+                        </tr>
+                        <tr>
+                            <th>تاريخ الشحنة</th>
+                            <td>@item.date</td>
+                        </tr>
+                        <tr>
+                            <th>إجمالي المبلغ</th>
+                            <td>@item.total_price</td>
+                        </tr>
+                        <tr>
+                            <th>حالة الشحنة</th>
+                            <td><span class="green">@item.type</span></td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <table class="wishlist-table">
+
+                    <tbody>
+                        <tr>
+                            <th class="wishlist-image">صورة المنتج</th>
+                            <th>إسم المنتج</th>
+                            <th>سعر المنتج</th>
+                            <th>كمية المنتج</th>
+                            <th>حالة المنتج</th>
+                        </tr>
+                        @foreach (var Subitem in orderDetails) {
+                    <tr>
+                        <td class="wishlist-image">
+                            <a href="/product/"><img src="~/uploads/@Html.DisplayFor(modelItem => Subitem.tb_products.image)" alt="@Html.DisplayFor(modelItem => Subitem.tb_products.title)" class="thumbnail" style="width:100px; height:100px"></a>
+                        </td>
+                        <td class="wishlist-info">
+                            <h5><a href="/product/@Html.DisplayFor(modelItem => Subitem.tb_products.id)">@Html.DisplayFor(modelItem => Subitem.tb_products.title)</a></h5>
+                            <span class="product-category"><a href="/Category/@Html.DisplayFor(modelItem => Subitem.tb_products.tb_Categories.cat_name).ToString().Replace(" ", "_")">@Html.DisplayFor(modelItem => Subitem.tb_products.tb_Categories.cat_name)</a></span>
+                            <div class="rating readonly-rating" data-score="4" title="good" style="width: 100px;"><input type="hidden" name="score" value="4" readonly="readonly"></div>
+                        </td>
+                        <td class="wishlist-price">
+                            <span class="price">@Html.DisplayFor(modelItem => Subitem.tb_products.price) EGP</span>
+                        </td>
+                        <td class="wishlist-numbers">
+                            <div class="numeric-input">
+                                @Html.DisplayFor(modelItem => Subitem.quantity)
+                            </div>
+                        </td>
+                        
+                            <td class="wishlist-actions">
+                                @if (Subitem.type == "مرتجع")
+                                {
+                                    <span>مرتجع</span>
+                                }
+                                else
+                                {
+                                    if (item.type == "لم تشحن بعد")
+                                    {
+                                        using (Html.BeginForm("NonShip", "Account", FormMethod.Post, new { id = "NonShip" }))
+                                        {
+                                            <a href="Javascript:document.getElementById('NonShip').submit()">
+                                                <input type="hidden" name="productId" value="@Subitem.product_id" />
+                                                <input type="hidden" name="purchID" value="@item.id" />
+                                                <input type="hidden" name="userID" value="@item.user_id" />
+                                                <span class="add-to-trash">
+                                                    <span class="action-wrapper">
+                                                        <i class="icons icon-cancel-circled"></i>
+                                                        <span class="action-name">إلغاء شحن المنتج</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        }
+                                    }
+                                    if (item.type == "تم الشحن")
+                                    {
+                                        using (Html.BeginForm("returnProduct", "Account", FormMethod.Get, new { id = "returnProduct" }))
+                                        {
+                                            <a href="Javascript:document.getElementById('returnProduct').submit()">
+                                                <input type="hidden" name="productId" value="@Subitem.product_id" />
+                                                <input type="hidden" name="purchID" value="@item.id" />
+                                                <input type="hidden" name="userID" value="@item.user_id" />
+                                                <span class="add-to-trash">
+                                                    <span class="action-wrapper">
+                                                        <i class="icons icon-cancel-circled"></i>
+                                                        <span class="action-name">إرجاع المنتج</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        }
+                                    }
+                                }
+
+
+                            
+                            </td>
+
+                        
+                    </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+}
+    </div>
+
+</div>
+
+    <div class="row">
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="category-results">
+                <p>Results 1-6 of 6</p>
+                <p>
+                    Show
+                    <select class="chosen-select" style="display: none;">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>6</option>
+                        <option>P10</option>
+                    </select><div class="chosen-container chosen-container-single chosen-container-single-nosearch" style="width: 71px;" title=""><a class="chosen-single" tabindex="-1"><span>1</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chosen-results"></ul></div></div>
+                    per page
+                </p>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="pagination">
+                <a href="#"><div class="previous"><i class="icons icon-left-dir"></i></div></a>
+                <a href="#"><div class="page-button">1</div></a>
+                <a href="#"><div class="page-button">2</div></a>
+                <a href="#"><div class="page-button">3</div></a>
+                <a href="#"><div class="next"><i class="icons icon-left-dir"></i></div></a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!--Partial Aside-->
+@Html.Partial("_account")
+<!--Partial Aside-->

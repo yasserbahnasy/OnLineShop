@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d9141906ad2f4180982198b31a8bcd70" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="OnlineShopDBModel.tb_Users" Width="1.5" PointX="2.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.tb_roles" Width="1.5" PointX="8" PointY="1.625" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.tb_Categories" Width="1.5" PointX="4.375" PointY="1.5" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.tb_products" Width="1.5" PointX="1.5" PointY="2.375" />
+        <AssociationConnector Association="OnlineShopDBModel.FK__tb_produc__categ__182C9B23" />
+        <AssociationConnector Association="OnlineShopDBModel.FK__tb_produc__user___1920BF5C" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.sysdiagram" Width="1.5" PointX="8" PointY="3.625" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.tb_actions" Width="1.5" PointX="5.75" PointY="4.25" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_actions_tb_products" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_actions_tb_Users" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.tb_billinfo" Width="1.5" PointX="0.5" PointY="6.25" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_billinfo_tb_Users" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.tb_ship" Width="1.5" PointX="5.875" PointY="8.375" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_ship_tb_Users" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.tb_checkout" Width="1.5" PointX="8.125" PointY="6.625" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_checkout_tb_billinfo" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_checkout_tb_ship" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_checkout_tb_Users" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.tb_orderDetails" Width="1.5" PointX="10.875" PointY="5" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_orderDetails_tb_products" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_orderDetails_tb_Users" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.tb_brands" Width="1.5" PointX="0.75" PointY="10.75" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_products_tb_brands" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_orderDetails_tb_checkout" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.tb_reterned" Width="1.5" PointX="13.375" PointY="4.875" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_reterned_tb_checkout" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_reterned_tb_products" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_tb_reterned_tb_Users" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,89 @@
+﻿@model OnLineShop.Models.tb_Users
+
+@{
+    ViewBag.Title = "تسجيل حساب جديد";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="breadcrumbs">
+            <p><a href="/">الرئيسية</a> <i class="icons icon-left-dir"></i> تسجيل حساب</p>
+        </div>
+    </div>
+    <section class="main-content col-lg-9 col-md-9 col-sm-9">
+
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 register-account">
+
+                <div class="carousel-heading no-margin">
+                    <h4>تسجيل حساب</h4>
+                </div>
+
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.fullname, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.fullname, new { htmlAttributes = new { @class = "form-control" , @placeholder = "الإسم كامل" } })
+                            @Html.ValidationMessageFor(model => model.fullname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" , @placeholder = "البريد الإلكتروني" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", @placeholder = "كلمة السر" } })
+                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.type, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.DropDownList("type", null, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", @placeholder = "إسم المستخدم" } })
+                            @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <input class="big" type="submit" value="تسجيل">
+                            <input class="big" type="reset" value="إلغاء">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+}
+<!--Partial Aside-->
+@Html.Partial("_Aside")
+<!--Partial Aside-->

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<OnLineShop.Models.tb_products>
+
+@{
+    ViewBag.Title = "البحث";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="main-content col-lg-9 col-md-9 col-sm-9">
+
+    <div class="row">
+
+        <!-- Heading -->
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <div class="carousel-heading">
+                <h4>نتائج البحث</h4>
+            </div>
+
+        </div>
+        <!-- /Heading -->
+
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+        <!-- Product Item -->
+            <div class="col-lg-4 col-md-4 col-sm-4 product">
+
+                <div class="product-image">
+                    <img src="~/uploads/@item.image" alt="Product1">
+                    <a href="~/product/@item.id" class="product-hover">
+                        <i class="icons icon-eye-1"></i> نظرة سريعه
+                    </a>
+                </div>
+
+                <div class="product-info">
+                    <h5><a href="~/product/@item.id">@item.title</a></h5>
+                    <span class="price">@item.price EGP</span>
+                    <div class="rating readonly-rating" data-score="4" title="good" style="width: 100px;"></div>
+                </div>
+
+                <div class="product-actions">
+                    <span class="add-to-cart">
+                        @using (Html.BeginForm("AddCart", "Home", new { product_id = @item.id }, FormMethod.Post, new { id = "addcart " + @item.id }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="quantity" id="quantity" value="1">
+
+                            <span class="action-wrapper">
+                                <a href="Javascript:document.getElementById('addcart @item.id').submit()">
+                                    <i class="icons icon-basket-2"></i>
+                                    <span class="action-name">إضافة إلي سلة المشتريات</span>
+                                </a>
+                            </span>
+                        }
+                    </span>
+                    <span class="add-to-favorites">
+                        <span class="action-wrapper">
+                            <a id="AddToWish">
+                                <input type="hidden" name="product_id" id="product_id" value="@item.id">
+                                <i class="icons icon-heart-empty"></i>
+                                <span class="action-name">إضافة إلي المفضلات</span>
+                            </a>
+                        </span>
+                    </span>
+                    
+                </div>
+
+            </div>
+        <!-- Product Item -->
+        }
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="pagination">
+                <a href="#"><div class="previous"><i class="icons icon-left-dir"></i></div></a>
+                <a href="#"><div class="page-button">1</div></a>
+                <a href="#"><div class="page-button">2</div></a>
+                <a href="#"><div class="page-button">3</div></a>
+                <a href="#"><div class="next"><i class="icons icon-left-dir"></i></div></a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</section>
+
+<!--Partial Aside-->
+@Html.Partial("_Aside")
+<!--Partial Aside-->
